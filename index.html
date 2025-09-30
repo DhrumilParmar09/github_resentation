@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #4a148c 50%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .slide-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 60px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-title i {
+            font-size: 48px;
+            color: #333;
+        }
+
+        .header-title h1 {
+            font-size: 48px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .header-divider {
+            height: 4px;
+            width: 120px;
+            background: #7c3aed;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-icon {
+            text-align: center;
+            color: #7c3aed;
+            margin-bottom: 20px;
+        }
+
+        .slide-icon i {
+            font-size: 96px;
+        }
+
+        .slide-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .content-box {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .content-box ul {
+            list-style: none;
+        }
+
+        .content-box li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .content-box li:last-child {
+            margin-bottom: 0;
+        }
+
+        .bullet {
+            color: #7c3aed;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .explanation-box {
+            background: #f3e8ff;
+            border-left: 4px solid #7c3aed;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .explanation-box p {
+            color: #374151;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .explanation-label {
+            font-weight: 600;
+            color: #6d28d9;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #6d28d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot:hover {
+            background: #9ca3af;
+        }
+
+        .dot.active {
+            background: #7c3aed;
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        .slide-counter {
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .slide-container {
+                padding: 30px 20px;
+            }
+
+            .header-title h1 {
+                font-size: 32px;
+            }
+
+            .header-title i {
+                font-size: 32px;
+            }
+
+            .slide-title {
+                font-size: 28px;
+            }
+
+            .slide-icon i {
+                font-size: 64px;
+            }
+
+            .content-box li {
+                font-size: 16px;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slide-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-title">
+                </div>
+            </div>
+
+            <!-- My information (Slide 0) -->
+<div class="slide active" data-slide="0">
+    <div class="slide-content">
+        <div class="slide-icon">
+            <i class="fab fa-github"></i>
+        </div>
+        <h2 class="slide-title"> Presentation</h2>
+        <div class="content-box">
+            <ul>
+                <li><span class="bullet">•</span><span>Name : Parmar Dhrumil Amitbhai</span></li>
+                <li><span class="bullet">•</span><span>Class : SY BCA C</span></li>
+                <li><span class="bullet">•</span><span>Roll NO : 34</span></li>
+                <li><span class="bullet">•</span><span>Subject : GitHub Explanation</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 1 -->
+<div class="slide" data-slide="1">
+    <div class="slide-content">
+        <div class="slide-icon">
+            <i class="fab fa-github"></i>
+        </div>
+        <h2 class="slide-title">What is GitHub?</h2>
+        <div class="content-box">
+            <ul>
+                <li><span class="bullet">•</span><span>GitHub is the world's leading platform for version control and collaboration</span></li>
+                <li><span class="bullet">•</span><span>Built on Git - a distributed version control system created by Linus Torvalds</span></li>
+                <li><span class="bullet">•</span><span>Hosts over 100 million repositories and 100+ million developers worldwide</span></li>
+                <li><span class="bullet">•</span><span>Owned by Microsoft (acquired in 2018 for $7.5 billion)</span></li>
+            </ul>
+        </div>
+        <div class="explanation-box">
+            <p><span class="explanation-label">Explanation: </span>GitHub serves as a cloud-based hosting service for Git repositories...</p>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Slide 2 -->
+            <div class="slide" data-slide="1">
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2 class="slide-title">Key Features</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><span class="bullet">•</span><span>Repositories: Store and organize your project files</span></li>
+                            <li><span class="bullet">•</span><span>Branches: Work on different versions simultaneously</span></li>
+                            <li><span class="bullet">•</span><span>Pull Requests: Propose and review code changes</span></li>
+                            <li><span class="bullet">•</span><span>Issues: Track bugs and feature requests</span></li>
+                            <li><span class="bullet">•</span><span>Actions: Automate workflows and CI/CD pipelines</span></li>
+                            <li><span class="bullet">•</span><span>GitHub Pages: Host static websites for free</span></li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><span class="explanation-label">Explanation: </span>These features make GitHub powerful for both individual developers and teams. Repositories act as project folders, branches let you experiment without affecting main code, pull requests enable code review, issues help project management, Actions automate testing and deployment, and Pages lets you showcase your work online.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+<div class="slide" data-slide="2">
+    <div class="slide-content">
+        <div class="slide-icon">
+            <i class="fab fa-github"></i>
+        </div>
+        <h2 class="slide-title">How GitHub Works</h2>
+        <div class="content-box">
+            <ul>
+                <li><span class="bullet">•</span><span>Repository → Stores your project code on GitHub</span></li>
+                <li><span class="bullet">•</span><span>Clone → Copy a GitHub repo to your local machine</span></li>
+                <li><span class="bullet">•</span><span>Push → Upload your local commits to GitHub</span></li>
+                <li><span class="bullet">•</span><span>Pull → Download latest changes from GitHub</span></li>
+                <li><span class="bullet">•</span><span>Pull Requests → Propose and review code changes</span></li>
+                <li><span class="bullet">•</span><span>Issues & Discussions → Track bugs, ideas, and collaboration</span></li>
+            </ul>
+        </div>
+        <div class="explanation-box">
+            <p><span class="explanation-label">Explanation: </span>GitHub is a cloud-based hosting platform for Git repositories. Developers use it to collaborate, share projects, and manage code. You clone repositories to work locally, push commits to share progress, and pull updates from teammates. Pull Requests and Issues make teamwork, code reviews, and project management easier.</p>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Slide 4 -->
+            <div class="slide" data-slide="3">
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h2 class="slide-title">Collaboration Features</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><span class="bullet">•</span><span>Forking: Create your own copy of any public repository</span></li>
+                            <li><span class="bullet">•</span><span>Code Review: Comment on specific lines of code</span></li>
+                            <li><span class="bullet">•</span><span>Team Management: Organize members with different permissions</span></li>
+                            <li><span class="bullet">•</span><span>Wikis & Documentation: Create project documentation</span></li>
+                            <li><span class="bullet">•</span><span>Discussions: Community forums for your project</span></li>
+                            <li><span class="bullet">•</span><span>Notifications: Stay updated on project activity</span></li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><span class="explanation-label">Explanation: </span>GitHub transforms coding from a solo activity into a collaborative process. You can fork projects to experiment, contribute to open source, get feedback through code reviews, manage team permissions, maintain documentation, engage with users through discussions, and stay informed with notifications.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide" data-slide="4">
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h2 class="slide-title">Why Use GitHub?</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><span class="bullet">•</span><span>Portfolio Building: Showcase your projects to employers</span></li>
+                            <li><span class="bullet">•</span><span>Learning: Study code from millions of open-source projects</span></li>
+                            <li><span class="bullet">•</span><span>Collaboration: Work with developers worldwide</span></li>
+                            <li><span class="bullet">•</span><span>Version Control: Never lose your work, track every change</span></li>
+                            <li><span class="bullet">•</span><span>Industry Standard: Used by Google, Facebook, Microsoft, etc.</span></li>
+                            <li><span class="bullet">•</span><span>Free: Unlimited public and private repositories</span></li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><span class="explanation-label">Explanation: </span>For students and professionals, GitHub is invaluable. It serves as your coding portfolio that employers review during hiring. You can learn from real-world projects, contribute to major software, and collaborate globally. Version control prevents data loss and tracks progress. Since it's the industry standard, learning GitHub is essential for any tech career.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide" data-slide="5">
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h2 class="slide-title">Getting Started</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><span class="bullet">•</span><span>1. Create a free account at github.com</span></li>
+                            <li><span class="bullet">•</span><span>2. Install Git on your computer</span></li>
+                            <li><span class="bullet">•</span><span>3. Configure Git with your name and email</span></li>
+                            <li><span class="bullet">•</span><span>4. Create your first repository</span></li>
+                            <li><span class="bullet">•</span><span>5. Learn basic commands: init, add, commit, push, pull</span></li>
+                            <li><span class="bullet">•</span><span>6. Explore GitHub Desktop for a GUI alternative</span></li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><span class="explanation-label">Explanation: </span>Starting with GitHub is straightforward: Sign up for free, install Git locally, set up your credentials, and create a repository. Master five essential commands (init, add, commit, push, pull) and you're ready. For beginners, GitHub Desktop provides a user-friendly visual interface. Practice by creating small projects, contributing to open source, and gradually exploring advanced features like Actions and branching strategies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+
+                <div class="dots-container" id="dotsContainer"></div>
+
+                <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Slide Counter -->
+            <div class="slide-counter" id="slideCounter">
+                Slide 1 of 6
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 7;
+
+        // Initialize dots
+        function initDots() {
+            const dotsContainer = document.getElementById('dotsContainer');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Show slide
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const counter = document.getElementById('slideCounter');
+
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Remove active from all dots
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Show current slide
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');
+
+            // Update counter
+            counter.textContent = `Slide ${n + 1} of ${totalSlides}`;
+
+            // Disable/enable buttons
+            prevBtn.disabled = n === 0;
+            nextBtn.disabled = n === totalSlides - 1;
+        }
+
+        // Change slide
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            showSlide(currentSlide);
+        }
+
+        // Go to specific slide
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        initDots();
+        showSlide(0);
+    </script>
+</body>
+</html>
